@@ -1,0 +1,6 @@
+{# customer/_customer_list.html.twig #}
+<ul>
+    {% for customer in customers %}
+        <li>{{ customer.Name }} - {{ customer.phone }} - {{ customer.email }}</li>
+    {% endfor %}
+</ul>

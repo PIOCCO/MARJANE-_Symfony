@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delete Account{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Delete Account</h1>
+    <p>Are you sure you want to delete the account <strong>{{ account.accountName }}</strong>?</p>
+
+    <form method="post" action="{{ path('account_delete', { id: account.id }) }}">
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="{{ path('account_index') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

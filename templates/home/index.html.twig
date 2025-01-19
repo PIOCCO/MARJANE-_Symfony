@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Welcome to the Home Page!</h1>
+        <p>This is your home page content.</p>
+
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <p>Welcome, {{ app.user.username }}!</p>
+            <a href="{{ path('logout') }}" class="btn btn-danger">Logout</a>
+        {% else %}
+            <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
+        {% endif %}
+    </div>
+{% endblock %}
