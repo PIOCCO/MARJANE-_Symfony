@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LineItem{% endblock %}
+
+{% block body %}
+    <h1>LineItem</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ line_item.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ line_item.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ line_item.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_line_item_index') }}">back to list</a>
+
+    <a href="{{ path('app_line_item_edit', {'id': line_item.id}) }}">edit</a>
+
+    {{ include('line_item/_delete_form.html.twig') }}
+{% endblock %}

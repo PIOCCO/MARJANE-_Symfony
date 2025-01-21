@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Index{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-12">
+    <h1 class="text-5xl font-extrabold text-center mb-12 text-gray-900">
+        Explore Our Mind-Blowing Products
+    </h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+        {% for product in products %}
+        <div class="product-card p-4 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 text-white rounded-xl shadow-lg transform hover:scale-105 hover:rotate-2 transition-all hover:shadow-2xl">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-2">{{ product.name }}</h2>
+                <p class="text-sm mb-1">Supplier: {{ product.supplier }}</p>
+                <p class="text-sm">ID: {{ product.id }}</p>
+            </div>
+
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="{{ path('app_product_show', {'id': product.id}) }}" class="text-blue-100 hover:text-yellow-300 hover:text-2xl hover:transform hover:scale-110 hover:rotate-12 transition-all duration-300">Show</a>
+                <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="text-green-100 hover:text-red-500 hover:text-2xl hover:transform hover:scale-110 hover:rotate-12 transition-all duration-300">Edit</a>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-span-full text-center text-gray-500">
+            <p>No records found</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-12 text-center">
+        <a href="{{ path('app_product_new') }}" class="inline-block bg-gradient-to-br from-teal-500 via-yellow-500 to-red-500 text-white px-12 py-4 rounded-lg font-bold text-2xl transform hover:scale-125 hover:rotate-6 hover:shadow-2xl hover:bg-gradient-to-l transition-all duration-500">
+            Add New Product
+        </a>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #0d1117;
+        font-family: 'Roboto', sans-serif;
+        color: white;
+    }
+
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-blue-100:hover {
+        color: #a3d8ff;
+    }
+
+    .text-green-100:hover {
+        color: #ffb6b0;
+    }
+
+    .text-sm {
+        font-size: 14px;
+    }
+
+    .text-2xl {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .product-card:hover {
+        transform: rotate(2deg) scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .hover:rotate-12 {
+        transform: rotate(12deg);
+    }
+
+    .hover:scale-110 {
+        transform: scale(1.1);
+    }
+
+    .bg-gradient-to-br {
+        background: linear-gradient(to bottom right, #1c3b6d, #872ed8, #ff007d);
+    }
+
+    .bg-gradient-to-l {
+        background: linear-gradient(to left, #ff4c00, #fdcb6e, #00bcd4);
+    }
+
+    .hover:shadow-2xl {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .hover:text-2xl {
+        font-size: 1.25rem;
+    }
+
+    .hover:bg-gradient-to-l {
+        background: linear-gradient(to left, #ff4c00, #fdcb6e, #00bcd4);
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+
+    .transition-all-duration-500 {
+        transition: all 0.5s ease;
+    }
+</style>
+{% endblock %}

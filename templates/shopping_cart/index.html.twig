@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ShoppingCart index{% endblock %}
+
+{% block body %}
+    <style>
+        /* Background gradient animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(45deg, #6a11cb, #2575fc, #6a11cb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #222;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+
+        table th {
+            color: #fff;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background-color: #444;
+        }
+
+        table td a {
+            text-decoration: none;
+            color: #ff6f61;
+            font-weight: bold;
+            margin-right: 10px;
+            transition: color 0.3s ease;
+        }
+
+        table td a:hover {
+            color: #ffb300;
+        }
+
+        .create-new-btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+            text-decoration:none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .create-new-btn:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+    </style>
+
+    <div class="container">
+        <h1>Your ShoppingCart</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shopping_cart in shopping_carts %}
+                    <tr>
+                        <td>{{ shopping_cart.id }}</td>
+                        <td>{{ shopping_cart.created ? shopping_cart.created|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('app_shopping_cart_show', {'id': shopping_cart.id}) }}">Show</a>
+                            <a href="{{ path('app_shopping_cart_edit', {'id': shopping_cart.id}) }}">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_shopping_cart_new') }}" class="create-new-btn">Create New</a>
+        <a href="{{ path('customer_index') }}" class="create-new-btn">Back to Customers List</a>
+    </div>
+{% endblock %}

@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\OrderRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -16,7 +18,7 @@ class Order
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $numbrt = null;
+    private ?string $numbrt = null;  // Renamed back to 'numbrt'
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $ordered = null;
@@ -27,6 +29,26 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $ship_to = null;
 
+
+    // Many-to-One relationship with Customer
+    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customer $customer = null;
+
+    // Getters and Setters for the Customer relationship
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): static
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    // Getters and Setters for the other fields
     public function getId(): ?int
     {
         return $this->id;

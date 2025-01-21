@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ShoppingCart{% endblock %}
+
+{% block body %}
+    <style>
+        /* Gradient background animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff8c00, #ff004f, #7e5bc0);
+            background-size: 400% 400%;
+            animation: gradientAnimation 12s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Soft white background */
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff004f;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ff004f;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ff004f;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #7e5bc0;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #b058d8;
+            transform: scale(1.05);
+        }
+
+        .back-link {
+            margin-top: 10px;
+            display: inline-block;
+            color: #28a745;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #218838;
+        }
+
+        .edit-link {
+            margin-top: 10px;
+            display: inline-block;
+            color: #ffc107;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .edit-link:hover {
+            color: #e0a800;
+        }
+
+        .delete-link {
+            margin-top: 10px;
+            display: inline-block;
+            color: #dc3545;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .delete-link:hover {
+            color: #c82333;
+        }
+    </style>
+
+    <div class="container">
+        <h1>ShoppingCart Details</h1>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ shopping_cart.id }}</td>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <td>{{ shopping_cart.created ? shopping_cart.created|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_shopping_cart_index') }}" class="btn back-link">Back to List</a>
+
+        <a href="{{ path('app_shopping_cart_edit', {'id': shopping_cart.id}) }}" class="btn edit-link">Edit</a>
+
+        {{ include('shopping_cart/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

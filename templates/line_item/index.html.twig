@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LineItem Index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="text-center">Your Purchased Items</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for line_item in line_items %}
+                <tr>
+                    <td>
+                        <img src="{{ asset('uploads/products/' ~ line_item.product.image) }}" alt="{{ line_item.product.name }}" class="img-thumbnail" width="100">
+                    </td>
+                    <td>{{ line_item.product.name }}</td>
+                    <td>{{ line_item.quantity }}</td>
+                    <td>${{ line_item.price|number_format(2) }}</td>
+                    <td>${{ (line_item.price * line_item.quantity)|number_format(2) }}</td>
+                    <td>
+                        <a href="{{ path('app_line_item_show', {'id': line_item.id}) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ path('app_line_item_edit', {'id': line_item.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No items found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_line_item_new') }}" class="btn btn-primary">Add New Item</a>
+        </div>
+    </div>
+{% endblock %}

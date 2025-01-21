@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WebUser index{% endblock %}
+
+{% block body %}
+    <h1>WebUser index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>LoginId</th>
+                <th>Password</th>
+                <th>State</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for web_user in web_users %}
+            <tr>
+                <td>{{ web_user.loginId }}</td>
+                <td>{{ web_user.password }}</td>
+                <td>{{ web_user.state }}</td>
+                <td>
+                    <a href="{{ path('app_web_user_show', {'loginId': web_user.loginId}) }}">show</a>
+                    <a href="{{ path('app_web_user_edit', {'loginId': web_user.loginId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_web_user_new') }}">Create new</a>
+{% endblock %}

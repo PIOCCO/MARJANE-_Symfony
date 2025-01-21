@@ -1,0 +1,178 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Order{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body {
+        background-color: #eef2f7;
+        font-family: 'Roboto', sans-serif;
+        color: #444;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: 50px auto;
+    }
+
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-container label {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-container input,
+    .form-container textarea,
+    .form-container select {
+        padding: 12px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+    }
+
+    .form-container input:focus,
+    .form-container textarea:focus,
+    .form-container select:focus {
+        border-color: #3498db;
+        box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+        outline: none;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+        border-radius: 50px;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: white;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+        transform: translateY(-3px);
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+    }
+
+    .btn-danger:hover {
+        background-color: #c0392b;
+        transform: translateY(-3px);
+    }
+
+    .action-links {
+        text-align: center;
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .action-links a {
+        font-size: 1rem;
+        text-decoration: none;
+        font-weight: bold;
+        color: #3498db;
+        transition: all 0.3s ease;
+    }
+
+    .action-links a:hover {
+        color: #2980b9;
+        transform: translateY(-2px);
+    }
+
+    .delete-section {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .delete-section form button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .delete-section form button:hover {
+        background-color: #c0392b;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 30px;
+        }
+
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .action-links {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Edit Order</h1>
+
+    <div class="form-container">
+        {{ include('order/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+
+    <div class="delete-section">
+        {{ include('order/_delete_form.html.twig') }}
+    </div>
+
+    <div class="action-links">
+        <a href="{{ path('app_order_index') }}" class="btn btn-primary">.</a>
+    </div>
+
+    
+</div>
+{% endblock %}

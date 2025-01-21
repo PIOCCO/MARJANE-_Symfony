@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LineItem{% endblock %}
+
+{% block body %}
+    <h1>Create new LineItem</h1>
+
+    {{ include('line_item/_form.html.twig') }}
+
+    <a href="{{ path('app_line_item_index') }}">back to list</a>
+{% endblock %}

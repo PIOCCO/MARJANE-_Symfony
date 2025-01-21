@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Entity\Order;
 use App\Entity\Customer;
+use App\Form\OrderType;
 use App\Form\CustomerType;
 use App\Form\AccountType;
 use App\Repository\CustomerRepository;
@@ -169,4 +171,36 @@ public function createAccount(Request $request, Customer $customer, EntityManage
         'customer' => $customer,
     ]);
 }
+
+#[Route('/customer/{id}/create_order', name: 'order_create', methods: ['GET', 'POST'])]
+public function createOrder(Request $request, Customer $customer, EntityManagerInterface $entityManager): Response
+{
+    // Create a new order instance
+    $order = new Order();
+
+    // Associate the order with the customer
+    $order->setCustomer($customer);
+
+    // Create the form for the order
+    $form = $this->createForm(OrderType::class, $order);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Persist the order
+        $entityManager->persist($order);
+        $entityManager->flush();
+
+        // Add a success message
+        $this->addFlash('success', 'Order created successfully!');
+
+        // Redirect to the customer page or orders page
+        return $this->redirectToRoute('customer_show', ['id' => $customer->getId()]);
+    }
+
+    return $this->render('order/create.html.twig', [
+        'form' => $form->createView(),
+        'customer' => $customer,
+    ]);
+}
+
 }

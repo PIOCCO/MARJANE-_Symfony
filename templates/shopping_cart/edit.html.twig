@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ShoppingCart{% endblock %}
+
+{% block body %}
+    <style>
+        /* Gradient background animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(45deg, #6a11cb, #2575fc, #6a11cb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 12s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark transparent background */
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-container input, .form-container select, .form-container button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ffdf91;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffd700;
+        }
+
+        .delete-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #e74c3c;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .delete-link:hover {
+            color: #c0392b;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Edit ShoppingCart</h1>
+
+        <div class="form-container">
+            {{ include('shopping_cart/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+
+        <a href="{{ path('app_shopping_cart_index') }}" class="back-link">Back to list</a>
+
+        <div class="mt-4">
+            {{ include('shopping_cart/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

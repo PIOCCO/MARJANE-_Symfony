@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WebUser{% endblock %}
+
+{% block body %}
+    <h1>WebUser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>LoginId</th>
+                <td>{{ web_user.loginId }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ web_user.password }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ web_user.state }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_web_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_web_user_edit', {'loginId': web_user.loginId}) }}">edit</a>
+
+    {{ include('web_user/_delete_form.html.twig') }}
+{% endblock %}

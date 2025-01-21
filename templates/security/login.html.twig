@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <style>
+        body {
+            background-image: url('https://media.delius-klasing.de/dk-wassersport/images/dpr_auto,fl_progressive,f_auto,c_fill,g_face:auto,h_600,w_1068/q_auto:eco/boot/adobestock-857067594_24f38552f58448d21ad26a41fa39748e/shooting-stars-the-perseids-flash-this-weekend'); /* Replace with your actual image URL */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8); /* White with slight transparency */
+            padding: 40px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px; /* You can adjust the max-width to your preference */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn-success {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .alert-danger {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+
+    <div class="login-container">
+        <h1>Login</h1>
+
+        <form action="{{ path('login') }}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="_username" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="_password" class="form-control" required />
+            </div>
+
+           <div class="text-center">
+                <button type="submit" class="btn btn-success" onclick="window.location.href='/customer';">Login</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopN Plans</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-center mb-8">ShopN Marketing Plans</h1>
+    <div class="grid md:grid-cols-3 gap-6">
+      
+      {% set plans = [
+        { name: 'Solo', price: '0', monthly: '12.69', color: 'pink', features: ['1 account included', 'Cancel anytime', 'Access to analytics & campaigns'] },
+        { name: 'Student', price: '0', monthly: '6.39', color: 'purple', features: ['1 account with discount', 'Cancel anytime', 'Advanced marketing tools'] },
+        { name: 'Duo', price: '1700.89', monthly: '', color: 'yellow', features: ['2 accounts included', 'Cancel anytime', 'Premium marketing dashboard'] }
+      ] %}
+      
+      {% for plan in plans %}
+      <div class="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+        <h2 class="text-2xl font-bold text-{{ plan.color }}-400 mb-4">{{ plan.name }}</h2>
+        <p class="text-lg font-semibold mb-6">${{ plan.price }}{% if plan.price == '0' %} for the first month{% endif %}</p>
+        {% if plan.monthly %}
+        <p class="text-sm text-gray-300 mb-4">${{ plan.monthly }}/month thereafter. Cancel anytime.</p>
+        {% else %}
+        <p class="text-sm text-gray-300 mb-4">Perfect for partners at the same address.</p>
+        {% endif %}
+        <ul class="space-y-2 text-gray-400">
+          {% for feature in plan.features %}
+          <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+        <button class="mt-6 w-full bg-{{ plan.color }}-500 hover:bg-{{ plan.color }}-600 text-white py-2 rounded-lg font-semibold">Start Now</button>
+      </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+</body>
+</html>

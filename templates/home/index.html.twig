@@ -3,15 +3,214 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1>Welcome to the Home Page!</h1>
-        <p>This is your home page content.</p>
+<style>
+    /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <p>Welcome, {{ app.user.username }}!</p>
-            <a href="{{ path('logout') }}" class="btn btn-danger">Logout</a>
-        {% else %}
-            <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
-        {% endif %}
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, 
+    #ff9a9e 0%, 
+    #fad0c4 35%, 
+    #fbc2eb 70%, 
+    #a18cd1 100%);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        overflow: hidden; /* Prevent scrolling */
+        height: 100vh; /* Make sure the body takes full viewport height */
+    }
+
+    /* Header Section */
+    .header {
+        background-color: #333;
+        padding: 20px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+
+    .header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+    }
+
+    .header h1 {
+        color: #fff;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .header a {
+        text-decoration: none;
+        color: #fff;
+        margin-right: 20px;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .header a:hover {
+        color: #ff6f61;
+    }
+
+    .header a.btn {
+        padding: 8px 20px;
+        background-color: #ff6f61;
+        color: #fff;
+        border-radius: 30px;
+        font-weight: bold;
+        border: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .header a.btn:hover {
+        background-color: #333;
+        color: #ff6f61;
+    }
+
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(135deg, #4b6cb7, #182848);
+        color: #fff;
+        text-align: center;
+        padding: 100px 20px;
+        background-image: url('https://cdn.discordapp.com/attachments/1324464063480205472/1330983893930741941/file-A3cDywJupe9Ew2GRQMoRFa.png?ex=678ff6d8&is=678ea558&hm=7a0c91cc97568fca7f9121d9f4dc43a2aedb5862dafb10f0440f87c0534c0620&');
+        background-size: cover;
+        height: 100vh; /* Ensure the hero section takes full viewport height */
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+    .hero h2 {
+        font-size: 50px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        z-index: 2;
+        position: relative;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero h2 span {
+        color: #ff6f61;
+    }
+
+    .hero p {
+        font-size: 22px;
+        margin-top: 15px;
+        z-index: 2;
+        position: relative;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Buttons Section */
+    .buttons-section {
+        padding: 60px 20px;
+        text-align: center;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        margin-top: 30px; /* Move the button down */
+    }
+
+    .btn-modern {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #ffffff;
+        background: linear-gradient(135deg, #ff6f61, #e85542);
+        border: none;
+        border-radius: 50px;
+        text-transform: uppercase;
+        text-decoration: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .btn-modern span {
+        font-weight: normal;
+        margin-right: 8px;
+    }
+
+    .btn-modern:hover {
+        background: linear-gradient(135deg, #e85542, #ff6f61);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-modern:active {
+        transform: translateY(1px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Media Query for mobile responsiveness */
+    @media (max-width: 768px) {
+        .header .container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+        }
+
+        .buttons-section .card {
+            max-width: 90%;
+        }
+    }
+</style>
+
+<!-- Header Section -->
+<div class="header">
+    <div class="container">
+        <h1>ShoN</h1>
+        <div>
+            <a href="#">Contact Us</a>
+            <a href="#">Blog</a>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="{{ path('logout') }}" class="btn btn-danger">Logout</a>
+            {% else %}
+                <a href="{{ path('login') }}" class="btn btn-primary">My Account</a>
+            {% endif %}
+        </div>
     </div>
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h2>Purchase your items <span>NOW.</span></h2>
+    <p>Get your VIP now for a 30% Discount.</p>
+    <!-- Buttons Section -->
+    <div class="buttons-section">
+        <a href="/Premium.html" class="btn-modern">
+            <span>Premium is now</span> 
+            <strong>For Free</strong>
+        </a>
+    </div>
+</div>
+
 {% endblock %}
